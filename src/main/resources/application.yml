@@ -5,4 +5,6 @@ spring:
     username: root
     password: 123456
     url: jdbc:mysql://localhost:3306/testdb?characterEncoding=utf-8&serverTimezone=Asia/Shanghai
-    driver-class-name: org.apache.ibatis.datasource.unpooled.UnpooledDataSource.DriverProxy
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  application:
+    name: "zbinyds-测试专属"

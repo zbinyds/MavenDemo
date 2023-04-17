@@ -4,11 +4,12 @@ import cn.hutool.core.date.DateUtil;
 import com.alibaba.fastjson.JSON;
 import com.zbinyds.central.pojo.Test;
 import com.zbinyds.central.pojo.vo.TestUploadVo;
-import jdk.nashorn.internal.parser.JSONParser;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import java.util.Date;
 
 /**
