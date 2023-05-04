@@ -1,7 +1,6 @@
 package com.zbinyds.central.pojo.vo;
 
 import com.zbinyds.central.pojo.Test;
-import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.Serializable;

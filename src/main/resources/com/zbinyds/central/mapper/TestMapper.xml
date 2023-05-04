@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zbinyds.central.mapper.TestMapper" >
+  <resultMap id="BaseResultMap" type="com.zbinyds.central.pojo.Test" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="queryString" property="querystring" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="findZbinResultMap" type="com.zbinyds.central.pojo.Test" >
+    <result column="queryString" property="querystring" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_test
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zbinyds.central.pojo.Test" >
+    insert into t_test (id, queryString, create_time, 
+      update_time)
+    values (#{id,jdbcType=INTEGER}, #{querystring,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.zbinyds.central.pojo.Test" >
+    update t_test
+    set queryString = #{querystring,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, queryString, create_time, update_time
+    from t_test
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, queryString, create_time, update_time
+    from t_test
+  </select>
+  <!-- findZbinList -->
+  <select id="findZbinList" resultMap="findZbinResultMap" parameterType="java.lang.String">
+    select id,queryString,create_time,update_time
+    from t_test
+    where queryString like #{queryString}
+  </select>
+</mapper>
