@@ -1,9 +1,8 @@
 package com.zbinyds.central.mapper;
 
-import com.zbinyds.central.pojo.Test;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.zbinyds.central.pojo.Test;
 import org.apache.ibatis.annotations.Mapper;
-import org.mybatis.spring.annotation.MapperScan;
 
 /**
 * @author zbinyds
