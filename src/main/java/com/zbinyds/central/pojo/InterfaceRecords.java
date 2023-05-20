@@ -7,25 +7,20 @@ import java.util.Date;
 import lombok.Data;
 
 /**
- * 测试表
- * @TableName t_test
+ * 接口调用记录表
+ * @TableName t_interface_records
  */
-@TableName(value ="t_test")
+@TableName(value ="t_interface_records")
 @Data
-public class Test implements Serializable {
+public class InterfaceRecords implements Serializable {
 
-    private static final long serialVersionUID = 5283979627664961592L;
+    private static final long serialVersionUID = -2929053104584681309L;
 
     /**
      * 主键id
      */
     @TableId(type = IdType.AUTO)
     private Integer id;
-
-    /**
-     * 前端传递而来的查询字符串
-     */
-    private String querystring;
 
     /**
      * 创建时间
@@ -50,9 +45,8 @@ public class Test implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        Test other = (Test) that;
+        InterfaceRecords other = (InterfaceRecords) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getQuerystring() == null ? other.getQuerystring() == null : this.getQuerystring().equals(other.getQuerystring()))
             && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
             && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()));
     }
@@ -62,7 +56,6 @@ public class Test implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getQuerystring() == null) ? 0 : getQuerystring().hashCode());
         result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
         result = prime * result + ((getUpdateTime() == null) ? 0 : getUpdateTime().hashCode());
         return result;
@@ -75,7 +68,6 @@ public class Test implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", querystring=").append(querystring);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);

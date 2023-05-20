@@ -4,13 +4,29 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <!--  配置springBoot版本依赖  -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.6</version>
+    </parent>
+
     <groupId>com.zbinyds</groupId>
     <artifactId>MavenDemo</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <!--  配置依赖版本 -->
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+        <java.version>1.8</java.version>
+        <mybatis-plus.version>3.4.1</mybatis-plus.version>
+<!--        <mybatis.version>2.2.2</mybatis.version>-->
+        <mysql.version>8.0.27</mysql.version>
+        <hutool.version>5.8.16</hutool.version>
+        <lombok.version>1.18.26</lombok.version>
+        <pagehelper.version>1.4.6</pagehelper.version>
+        <fastjson.version>2.0.26</fastjson.version>
     </properties>
 
     <build>
@@ -60,89 +76,62 @@
         </plugins>
     </build>
 
+    <!--  项目依赖  -->
     <dependencies>
+        <!--   springBoot web  -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>2.7.6</version>
         </dependency>
+        <!--   springBoot test  -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <version>2.7.6</version>
         </dependency>
-        <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>2.2.2</version>
-        </dependency>
+        <!--   springBoot redis  -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
-            <version>2.7.6</version>
         </dependency>
-        <!--        <dependency>-->
-        <!--            <groupId>com.baomidou</groupId>-->
-        <!--            <artifactId>mybatis-plus</artifactId>-->
-        <!--            <version>3.5.3.1</version>-->
-        <!--        </dependency>-->
+<!--        &lt;!&ndash;   mybatis  &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.mybatis.spring.boot</groupId>-->
+<!--            <artifactId>mybatis-spring-boot-starter</artifactId>-->
+<!--            <version>${mybatis.version}</version>-->
+<!--        </dependency>-->
+        <!--   mybatis-plus  -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mybatis-plus.version}</version>
+        </dependency>
+        <!--   hutool  -->
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-core</artifactId>
-            <version>5.8.16</version>
+            <version>${hutool.version}</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.26</version>
+            <version>${lombok.version}</version>
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>2.0.26</version>
+            <version>${fastjson.version}</version>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.27</version>
+            <version>${mysql.version}</version>
         </dependency>
+        <!--   pagehelper  -->
         <dependency>
-            <groupId>org.jetbrains</groupId>
-            <artifactId>annotations</artifactId>
-            <version>RELEASE</version>
-            <scope>compile</scope>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>${pagehelper.version}</version>
         </dependency>
-        <!--        <dependency>-->
-        <!--            <groupId>org.springframework.boot</groupId>-->
-        <!--            <artifactId>spring-boot-starter-jdbc</artifactId>-->
-        <!--            <version>2.7.6</version>-->
-        <!--            <scope>compile</scope>-->
-        <!--        </dependency>-->
-        <!--        <dependency>-->
-        <!--            <groupId>com.xt.zeus.common</groupId>-->
-        <!--            <artifactId>zeus-mysql</artifactId>-->
-        <!--            <version>2.0.0</version>-->
-        <!--        </dependency>-->
-        <!--        <dependency>-->
-        <!--            <groupId>com.xt.zeus.common</groupId>-->
-        <!--            <artifactId>zeus-api</artifactId>-->
-        <!--            <version>2.0.0</version>-->
-        <!--        </dependency>-->
-        <!--        <dependency>-->
-        <!--            <groupId>com.xt.zeus.common</groupId>-->
-        <!--            <artifactId>zeus-dao</artifactId>-->
-        <!--            <version>2.0.0</version>-->
-        <!--        </dependency>-->
-        <!--        <dependency>-->
-        <!--            <groupId>com.xt.zeus.common</groupId>-->
-        <!--            <artifactId>zeus-redis-cache</artifactId>-->
-        <!--            <version>2.0.0</version>-->
-        <!--        </dependency>-->
-        <!--        <dependency>-->
-        <!--            <groupId>com.xt.zeus.common</groupId>-->
-        <!--            <artifactId>zeus-core</artifactId>-->
-        <!--            <version>2.0.0</version>-->
-        <!--        </dependency>-->
     </dependencies>
 
 </project>

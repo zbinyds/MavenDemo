@@ -1,7 +1,5 @@
 package com.zbinyds.central.config;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
@@ -12,43 +10,37 @@ import org.springframework.data.redis.listener.PatternTopic;
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.*;
 
 
 //配置类专属注解 并且完成自动注入
 @Configuration
 public class RedisConfig {
+
+    /**
+     * redis
+     * @param redisConnectionFactory
+     * @return
+     */
     @Bean
-    //配置redisTemplate
-    // 默认情况下的模板只能支持 RedisTemplate<String,String>，
-    // 只能存入字符串，很多时候，我们需要自定义 RedisTemplate ，设置序列化器
-    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
-        RedisTemplate<String, Object> template = new RedisTemplate<>();
-        template.setConnectionFactory(factory);
+    public RedisTemplate redisTemplate(RedisConnectionFactory redisConnectionFactory) {
+        RedisTemplate<Object, Object> template = new RedisTemplate();
+        template.setConnectionFactory(redisConnectionFactory);
 
         Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
-        ObjectMapper om = new ObjectMapper();
-        om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
-        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
-        jackson2JsonRedisSerializer.setObjectMapper(om);
+        jackson2JsonRedisSerializer.setObjectMapper(new ObjectMapper());
 
-        StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
-        // key采用String的序列化方式
-        template.setKeySerializer(stringRedisSerializer);
-        // hash的key也采用String的序列化方式
-        template.setHashKeySerializer(stringRedisSerializer);
-        // value序列化方式采用jackson
+        RedisSerializer stringSerializer = new StringRedisSerializer();
+
+        template.setKeySerializer(stringSerializer);
         template.setValueSerializer(jackson2JsonRedisSerializer);
-        // hash的value序列化方式采用jackson
+
+        template.setHashKeySerializer(stringSerializer);
         template.setHashValueSerializer(jackson2JsonRedisSerializer);
-        template.afterPropertiesSet();
 
         return template;
     }
@@ -92,21 +84,39 @@ public class RedisConfig {
 
     /**
      * redis自动生成key策略
-     *
-     * @return
      */
     @Bean("keyGenerator")
     public KeyGenerator keyGenerator() {
         return (obj, method, params) -> {
-            String methodName = method.getName();
-            String sign = ":";
-            List<String> argList = Arrays.stream(method.getParameters()).map(Parameter::getName).collect(Collectors.toList());
-            String[] paramList = Arrays.copyOf(params, params.length, String[].class);
+            // 最终 生成 的 缓存 key 规则 ==> 接口名:参数1=参数1值,参数2=参数2值
             StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < argList.size(); i++) {
-                sb.append(argList.get(i)).append("=").append(paramList[i]);
-            }
-            return methodName + sign + sb;
+            sb.append(method.getName());
+            sb.append(":");
+
+            Arrays.stream(method.getParameters()).forEachOrdered(entity -> {
+                // 这里重写 ArrayList中的 indexOf() 方法
+                Integer index = null;
+                Parameter[] parameters = method.getParameters();
+                for (int i = 0; i < parameters.length; i++) {
+                    if (entity.equals(parameters[i])) {
+                        index = i;
+                    }
+                }
+                if (index == null) index = -1;
+
+                // 如果索引为 -1 的情况下, 可能发生异常
+                try {
+                    sb.append(entity.getName()).append("=").append(params[index]);
+                    // 最后一个参数后面, 无需拼接逗号
+                    if (index < parameters.length - 1) {
+                        sb.append(",");
+                    }
+                } catch (Exception e) {
+                    throw new RuntimeException("Generate Redis Key Error!");
+                }
+            });
+
+            return sb;
         };
     }
 }

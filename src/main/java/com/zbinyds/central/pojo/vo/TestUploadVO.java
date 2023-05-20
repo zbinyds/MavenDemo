@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @Create 2023/4/13 23:20
  */
 
-public class TestUploadVo extends Test implements Serializable {
+public class TestUploadVO extends Test implements Serializable {
 
     private static final long serialVersionUID = 6169757874747437076L;
 
