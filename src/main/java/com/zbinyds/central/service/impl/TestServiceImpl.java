@@ -25,10 +25,10 @@ public class TestServiceImpl extends ServiceImpl<TestMapper, Test>
     @Override
     public Page<Test> pageByQueryString(Integer pageNum, Integer pageSize, String queryString) {
         // 分页
-        Page<Test> page = new Page<>();
+        Page<Test> page = new Page<>(pageNum, pageSize);
         // 条件构造器
         LambdaQueryWrapper<Test> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.like(Test::getQuerystring, "%zbin%");
+        queryWrapper.like(Test::getQuerystring, queryString);
         return testMapper.selectPage(page, queryWrapper);
     }
 }
