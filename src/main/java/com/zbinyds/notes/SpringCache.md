@@ -29,3 +29,8 @@ public class TestController {
 }
 ```
 
+### 5、Caching注解
+
+> 支持 cacheable、cachePut、cacheEvict多种注解 实现灵活缓存数据
+> 例如：新增方法，可以同时使用cacheable、cacheEvict注解，一边将新增的数据缓存，一边将之前查询的缓存清除掉
+

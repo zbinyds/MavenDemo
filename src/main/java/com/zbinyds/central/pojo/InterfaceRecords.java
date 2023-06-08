@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -26,6 +27,7 @@ public class InterfaceRecords implements Serializable {
      * 主键id
      */
     @TableId(type = IdType.AUTO)
+    @NotNull(message = "InterfaceRecords id is null!")
     private Integer id;
 
     /**
@@ -39,4 +41,8 @@ public class InterfaceRecords implements Serializable {
      */
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
+
+    @TableField(exist = false)
+    @NotNull(message = "InterfaceRecords test is null!")
+    private Test test;
 }
