@@ -1,6 +1,5 @@
 package com.zbinyds.central.controller;
 
-import com.zbinyds.central.service.TestService;
 import com.zbinyds.central.strategy.AnimalStrategy;
 import com.zbinyds.central.strategy.AnimalStrategyFactory;
 import com.zbinyds.central.strategy.StrategyEnum;
@@ -23,8 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/strategy")
 public class StrategyController {
-
-    private final TestService testService;
 
     private final AnimalStrategyFactory animalStrategyFactory;
 
