@@ -1,33 +1,20 @@
-#spring:
-#  profiles:
-#    active: dev
-
 server:
-  port: { server.port }
+  port: 8333
 spring:
-  profiles:
-    active: mydev
   application:
     name: "learn-demo"
   datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://localhost:3306/testdb?characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai&allowMultiQueries=true&allowPublicKeyRetrieval=true&zeroDateTimeBehavior=CONVERT_TO_NULL
     driver-class-name: com.mysql.cj.jdbc.Driver
-    hikari:
-      connection-test-query: SELECT 1
-      max-lifetime: 30000
-      maximum-pool-size: 10
-      minimum-idle: 3
-    type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://${mysql.ip}:${mysql.port}/${mysql.db}?characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai&allowMultiQueries=true&allowPublicKeyRetrieval=true&zeroDateTimeBehavior=CONVERT_TO_NULL
-    username: ${mysql.username}
-    password: ${mysql.password}
-
   redis:
     # Redis本地服务器地址，注意要开启redis服务，即那个redis-server.exe
-    host: ${redis.ip}
+    host: 127.0.0.1
     # Redis服务器端口,默认为6379.若有改动按改动后的来
-    port: ${redis.port}
+    port: 6379
     #Redis服务器连接密码，默认为空，若有设置按设置的来
-    password: ${redis.password}
+    password: 123456
     jedis:
       pool:
         # 连接池最大连接数，若为负数则表示没有任何限制
@@ -44,3 +31,15 @@ mybatis-plus:
 
 mybatis:
   mapper-location: classpath:/mapper/*.xml
+
+  server.port=8085
+  
+  mysql.ip=127.0.0.1
+  mysql.port=3306
+  mysql.db=testdb
+  mysql.username=root
+  mysql.password=123456
+  
+  redis.ip=127.0.0.1
+  redis.port=6379
+  redis.password=123456

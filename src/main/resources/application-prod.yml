@@ -1,12 +1,6 @@
-#spring:
-#  profiles:
-#    active: dev
-
 server:
-  port: { server.port }
+  port: 8001
 spring:
-  profiles:
-    active: mydev
   application:
     name: "learn-demo"
   datasource:
@@ -17,17 +11,17 @@ spring:
       maximum-pool-size: 10
       minimum-idle: 3
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://${mysql.ip}:${mysql.port}/${mysql.db}?characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai&allowMultiQueries=true&allowPublicKeyRetrieval=true&zeroDateTimeBehavior=CONVERT_TO_NULL
-    username: ${mysql.username}
-    password: ${mysql.password}
+    url: jdbc:mysql://172.17.0.3:3306/testdb?characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai&allowMultiQueries=true&allowPublicKeyRetrieval=true&zeroDateTimeBehavior=CONVERT_TO_NULL
+    username: root
+    password: 123456
 
   redis:
     # Redis本地服务器地址，注意要开启redis服务，即那个redis-server.exe
-    host: ${redis.ip}
+    host: 172.17.0.4
     # Redis服务器端口,默认为6379.若有改动按改动后的来
-    port: ${redis.port}
+    port: 6379
     #Redis服务器连接密码，默认为空，若有设置按设置的来
-    password: ${redis.password}
+    password: 123456
     jedis:
       pool:
         # 连接池最大连接数，若为负数则表示没有任何限制
