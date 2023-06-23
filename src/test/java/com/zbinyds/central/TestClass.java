@@ -49,7 +49,7 @@ public class TestClass {
 
     @Test
     public void test3(){
-        redisTemplate.convertAndSend("zbinyds","hello,world!");
+        redisTemplate.convertAndSend("zbinyds1", "hello, world!");
     }
 
     @Test
@@ -72,6 +72,6 @@ public class TestClass {
 
     @Test
     public void test6() {
-        com.zbinyds.central.pojo.Test test = new com.zbinyds.central.pojo.Test();
+        // todo
     }
 }
