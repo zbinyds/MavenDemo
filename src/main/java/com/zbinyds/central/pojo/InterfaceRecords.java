@@ -31,6 +31,11 @@ public class InterfaceRecords implements Serializable {
     private Integer id;
 
     /**
+     * 信息
+     */
+    private String info;
+
+    /**
      * 创建时间
      */
     @TableField(fill = FieldFill.INSERT)

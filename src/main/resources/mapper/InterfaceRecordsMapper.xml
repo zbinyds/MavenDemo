@@ -5,12 +5,22 @@
 <mapper namespace="com.zbinyds.central.mapper.InterfaceRecordsMapper">
 
     <resultMap id="BaseResultMap" type="com.zbinyds.central.pojo.InterfaceRecords">
-            <id property="id" column="id" jdbcType="INTEGER"/>
-            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         id,create_time,update_time
     </sql>
+
+    <select id="asyncSelectByIds" resultType="com.zbinyds.central.pojo.InterfaceRecords">
+        select
+        <include refid="Base_Column_List"/>
+        from t_interface_records
+        where id in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
 </mapper>

@@ -22,12 +22,15 @@
         <maven.compiler.target>8</maven.compiler.target>
         <java.version>1.8</java.version>
         <mybatis-plus.version>3.4.1</mybatis-plus.version>
-<!--        <mybatis.version>2.2.2</mybatis.version>-->
+        <!--        <mybatis.version>2.2.2</mybatis.version>-->
         <mysql.version>8.0.27</mysql.version>
         <hutool.version>5.8.16</hutool.version>
         <lombok.version>1.18.26</lombok.version>
         <pagehelper.version>1.4.6</pagehelper.version>
         <fastjson.version>2.0.26</fastjson.version>
+        <javax-validation.version>2.7.5</javax-validation.version>
+        <jetbrains.version>19.0.0</jetbrains.version>
+        <hutool.version>5.8.18</hutool.version>
     </properties>
 
     <build>
@@ -98,12 +101,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
-<!--        &lt;!&ndash;   mybatis  &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.mybatis.spring.boot</groupId>-->
-<!--            <artifactId>mybatis-spring-boot-starter</artifactId>-->
-<!--            <version>${mybatis.version}</version>-->
-<!--        </dependency>-->
+        <!--        &lt;!&ndash;   mybatis  &ndash;&gt;-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.mybatis.spring.boot</groupId>-->
+        <!--            <artifactId>mybatis-spring-boot-starter</artifactId>-->
+        <!--            <version>${mybatis.version}</version>-->
+        <!--        </dependency>-->
         <!--   mybatis-plus  -->
         <dependency>
             <groupId>com.baomidou</groupId>
@@ -131,16 +134,33 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql.version}</version>
         </dependency>
-<!--        &lt;!&ndash;   pagehelper  &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>com.github.pagehelper</groupId>-->
-<!--            <artifactId>pagehelper-spring-boot-starter</artifactId>-->
-<!--            <version>${pagehelper.version}</version>-->
-<!--        </dependency>-->
+        <!--        &lt;!&ndash;   pagehelper  &ndash;&gt;-->
+        <!--        <dependency>-->
+        <!--            <groupId>com.github.pagehelper</groupId>-->
+        <!--            <artifactId>pagehelper-spring-boot-starter</artifactId>-->
+        <!--            <version>${pagehelper.version}</version>-->
+        <!--        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
-            <version>2.7.5</version>
+            <version>${javax-validation.version}</version>
+        </dependency>
+        <!-- CacheManager -->
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>caffeine</artifactId>
+        </dependency>
+        <!-- jetbrains注解 -->
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>${jetbrains.version}</version>
+        </dependency>
+        <!-- hutool 工具包 -->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>${hutool.version}</version>
         </dependency>
     </dependencies>
 
