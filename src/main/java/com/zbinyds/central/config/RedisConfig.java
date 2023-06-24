@@ -2,14 +2,12 @@ package com.zbinyds.central.config;
 
 import com.zbinyds.central.redis.ChannelEnum;
 import com.zbinyds.central.redis.MessageReceiver;
-import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
-import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.SerializationException;
@@ -22,13 +20,12 @@ import java.util.Objects;
 
 //配置类专属注解 并且完成自动注入
 @Configuration
-@EnableCaching
 public class RedisConfig {
 
     /**
      * 定制化 redis序列化工具
      */
-    public class MyRedisSerializerCustomized extends GenericJackson2JsonRedisSerializer {
+    public static class MyRedisSerializerCustomized extends GenericJackson2JsonRedisSerializer {
         /**
          * 序列化
          *
@@ -112,21 +109,21 @@ public class RedisConfig {
         container.addMessageListener(receiver, ChannelEnum.createPatternTopic(ChannelEnum.values()));
         return container;
     }
-
-    /**
+    /*
+     *//**
      * 方式二
      * 向 容器内 注册 消息监听适配器
      * 绑定 消息处理器，利用 反射 调用消息处理器的业务方法
      *
      * @param receiver 消息接收器
      * @return 消息监听器
-     */
+     *//*
     @Bean
     MessageListenerAdapter listenerAdapter(MessageReceiver receiver) {
         // 这个地方 是给messageListenerAdapter 传入一个消息接受的处理器，利用反射的方法调用“receiveMessage”
         // 也有好几个重载方法，这边默认调用处理器的方法 叫handleMessage 可以自己到源码里面看
         return new MessageListenerAdapter(receiver, "receiveMessage");
-    }
+    }*/
 
     /**
      * 定制redis自动生成key策略
