@@ -1,14 +1,17 @@
 package com.zbinyds.central;
 
+import cn.hutool.http.HttpUtil;
 import com.zbinyds.central.functionalInterface.TestInterface;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.cache.CacheManager;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -31,6 +34,9 @@ public class TestClass {
     @Resource
     private RedisTemplate redisTemplate;
 
+    @Resource(name = "caffeineCacheManager")
+    private CacheManager caffeineCacheManager;
+
 //    @Test
 //    public void test1() {
 //        String sql = "select * from t_test where id = ?";
@@ -48,7 +54,7 @@ public class TestClass {
     }
 
     @Test
-    public void test3(){
+    public void test3() {
         redisTemplate.convertAndSend("zbinyds1", "hello, world!");
     }
 
@@ -72,6 +78,15 @@ public class TestClass {
 
     @Test
     public void test6() {
-        // todo
+        String ip = "124.223.40.236";
+        // 通过淘宝接口解析得到ip归属地
+        String body = HttpUtil.get("https://ip.taobao.com/outGetIpInfo?ip=" + ip + "&accessKey=alibaba-inc");
+        log.info("body => {}", body);
+    }
+
+    @Test
+    public void test7() {
+        Collection<String> cacheNames = caffeineCacheManager.getCacheNames();
+        log.info("cacheNames => {}", cacheNames);
     }
 }
