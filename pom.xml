@@ -31,6 +31,9 @@
         <javax-validation.version>2.7.5</javax-validation.version>
         <jetbrains.version>19.0.0</jetbrains.version>
         <hutool.version>5.8.18</hutool.version>
+        <kaptcha.version>0.0.9</kaptcha.version>
+        <jwt.version>0.9.1</jwt.version>
+        <jwt-api.version>0.11.2</jwt-api.version>
     </properties>
 
     <build>
@@ -101,6 +104,16 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
+        <!--   springBoot aop  -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        <!--   springBoot security  -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
         <!--        &lt;!&ndash;   mybatis  &ndash;&gt;-->
         <!--        <dependency>-->
         <!--            <groupId>org.mybatis.spring.boot</groupId>-->
@@ -161,6 +174,24 @@
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
             <version>${hutool.version}</version>
+        </dependency>
+        <!-- kaptcha 验证码 -->
+        <dependency>
+            <groupId>com.github.axet</groupId>
+            <artifactId>kaptcha</artifactId>
+            <version>${kaptcha.version}</version>
+        </dependency>
+        <!-- JWT(Json Web Token) -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>${jwt.version}</version>
+        </dependency>
+        <!-- JWT 相关 api-->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+            <version>${jwt-api.version}</version>
         </dependency>
     </dependencies>
 

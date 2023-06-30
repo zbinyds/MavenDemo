@@ -6,7 +6,7 @@
         <option name="generateConfig">
           <GenerateConfig>
             <option name="annotationType" value="MYBATIS_PLUS3" />
-            <option name="basePackage" value="com.zbinyds.central" />
+            <option name="basePackage" value="com.zbinyds.security" />
             <option name="basePath" value="/src/main/java" />
             <option name="classNameStrategy" value="camel" />
             <option name="encoding" value="UTF-8" />
@@ -64,12 +64,8 @@
             <option name="tableUIInfoList">
               <list>
                 <TableUIInfo>
-                  <option name="className" value="Test" />
-                  <option name="tableName" value="t_test" />
-                </TableUIInfo>
-                <TableUIInfo>
-                  <option name="className" value="InterfaceRecords" />
-                  <option name="tableName" value="t_interface_records" />
+                  <option name="className" value="User" />
+                  <option name="tableName" value="t_user" />
                 </TableUIInfo>
               </list>
             </option>

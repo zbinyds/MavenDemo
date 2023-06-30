@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cache.CacheManager;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
@@ -33,6 +34,9 @@ public class TestClass {
 
     @Resource
     private RedisTemplate redisTemplate;
+
+    @Resource
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Resource(name = "caffeineCacheManager")
     private CacheManager caffeineCacheManager;
@@ -88,5 +92,11 @@ public class TestClass {
     public void test7() {
         Collection<String> cacheNames = caffeineCacheManager.getCacheNames();
         log.info("cacheNames => {}", cacheNames);
+    }
+
+    @Test
+    public void test() {
+        String encode = passwordEncoder.encode("123456");
+        log.info("encode password => {}", encode);
     }
 }

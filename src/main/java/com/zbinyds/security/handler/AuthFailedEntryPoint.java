@@ -1,0 +1,33 @@
+package com.zbinyds.security.handler;
+
+import com.zbinyds.central.util.Result;
+import com.zbinyds.security.util.ResponseUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.stereotype.Component;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+/**
+ * @Package: com.zbinyds.security.handler
+ * @Author zbinyds@126.com
+ * @Description:
+ * @Create 2023/6/29 22:48
+ */
+
+@Component
+public class AuthFailedEntryPoint implements AuthenticationEntryPoint {
+
+    private static final Logger log = LoggerFactory.getLogger(AuthFailedEntryPoint.class);
+
+    @Override
+    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
+        log.error("AuthenticationException error: {}", authException.getMessage());
+        ResponseUtil.out(request, response, Result.failed("认证失败!", 401));
+    }
+}

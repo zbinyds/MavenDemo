@@ -1,9 +1,9 @@
-package com.zbinyds.central.strategy;
+package com.zbinyds.central.strategy.verifyCode;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -16,18 +16,18 @@ import java.util.HashMap;
 
 @Component
 @RequiredArgsConstructor
-public class AnimalStrategyFactory {
+public class VerifyCodeStrategyFactory implements InitializingBean {
 
-    public static final HashMap<StrategyEnum, AnimalStrategy> data = new HashMap<>();
+    public static final HashMap<VerifyCodeEnum, VerifyCodeStrategy> data = new HashMap<>();
 
-    private final AnimalStrategy[] strategyArray;
+    private final VerifyCodeStrategy[] strategyArray;
 
-    @PostConstruct
-    public void register() {
+    @Override
+    public void afterPropertiesSet() {
         Arrays.stream(strategyArray).forEach(strategy -> data.put(strategy.getInstance(), strategy));
     }
 
-    public AnimalStrategy createStrategy(StrategyEnum strategyEnum) {
+    public VerifyCodeStrategy createStrategy(VerifyCodeEnum strategyEnum) {
         return data.get(strategyEnum);
     }
 }

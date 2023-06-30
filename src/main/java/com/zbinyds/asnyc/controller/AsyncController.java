@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 /**
@@ -39,7 +38,7 @@ public class AsyncController {
     }
 
     @GetMapping("/ip")
-    public Result<String> ipAnalyze(@RequestParam(value = "ip", required = false) @NotBlank(message = "必填参数不能为空!") String ip) {
+    public Result<String> ipAnalyze(@RequestParam(value = "ip") String ip) {
         // 通过淘宝接口解析得到ip归属地
         String body = HttpUtil.get("https://ip.taobao.com/outGetIpInfo?ip=" + ip + "&accessKey=alibaba-inc");
         log.info("body => {}", body);

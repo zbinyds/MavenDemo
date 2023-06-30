@@ -3,7 +3,7 @@
 #    active: dev
 
 server:
-  port: { server.port }
+  port: ${server.port}
 spring:
   profiles:
     active: mydev
